@@ -1,0 +1,66 @@
+{
+    "ablation": {
+        "mil_leave_one_out": true,
+        "modality_leave_one_out": true,
+        "patch_encoder_leave_one_out": true
+    },
+    "benchmark": {
+        "mil_methods": [
+            "MEAN_MIL",
+            "MAX_MIL",
+            "AB_MIL"
+        ]
+    },
+    "data": {
+        "dataset": "TCGA-LUAD",
+        "n_bins": 4,
+        "task": "survival"
+    },
+    "exp_name": "Training_Task_-_2026_6_9_16_00_22",
+    "model": {
+        "modalities": {
+            "gene": {
+                "enabled": true,
+                "encoder": "snn"
+            },
+            "wsi": {
+                "case_slide_fusion": "attention",
+                "enabled": true,
+                "mil_fusion": "1dim_attention",
+                "mil_methods": [
+                    "CLAM_SB",
+                    "CLAM_MB"
+                ],
+                "patch_encoders": [
+                    "kaiko-vits8",
+                    "kaiko-vitb8"
+                ],
+                "patch_fusion": "per_patch_attention"
+            }
+        },
+        "multimodal_fusion": "gated",
+        "survival_head": {
+            "dropout": 0.25,
+            "hidden_dim": 256
+        }
+    },
+    "optimization": {
+        "lr": 0.0001,
+        "optimizer": "adamw",
+        "scheduler": "none",
+        "weight_decay": 0.0005
+    },
+    "task_type": "pathology",
+    "training": {
+        "batch_size": 1,
+        "device": "cuda",
+        "epochs": 2,
+        "num_workers": 0,
+        "seed": 42
+    },
+    "visualization": {
+        "downstream_analysis": {
+            "enabled": true
+        }
+    }
+}
